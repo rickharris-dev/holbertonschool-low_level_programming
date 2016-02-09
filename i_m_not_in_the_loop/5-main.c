@@ -18,5 +18,9 @@ int main(void)
   print_char('\n');
   print_number(-2147483648);
   print_char('\n');
+  print_number(20);
+  print_char('\n');
+  print_number(-20);
+  print_char('\n');
   return (0);
 }
