@@ -2,5 +2,5 @@
 
 void printf_number(int n)
 {
-  printf("%d",n);
+  printf("%d",n); /* Prints the integer n with no spaces */
 }
