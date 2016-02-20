@@ -11,6 +11,6 @@ void print_combination_2(void)
 	    {
 	      printf(", ");            /* Prints a space */
 	    }
-	  printf("%i%i",a,c);
+	  printf("%i%i",a,c);          /* Prints the number */
 	}
 }
