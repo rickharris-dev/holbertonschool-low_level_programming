@@ -1,4 +1,4 @@
-#include "print_char.c"
+int print_char(char c);
 
 void print_string(char *str)
 {
