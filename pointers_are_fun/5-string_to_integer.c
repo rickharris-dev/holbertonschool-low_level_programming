@@ -1,67 +1,42 @@
-#include <stdio.h>
 #include <limits.h>
 
-int str_len(char *s)
+int is_num(char c, int opt)
 {
-  int i;
-
-  for(i = 0; *(s + i) > 0; i++){}
-
-  return (i);
-}
-
-int get_sign(char *s, int first)
-{
-  int i, sign;
-
-  for(i = 0, sign = -1; i < first; i++)
-    if (*(s + i) == 45)
-      sign *= -1;
-  return (sign);
-
-}
-
-int find_first_number(char *s, int len)
-{
-  int i;
-
-  for (i = 0; i < len; i++)
-    if (48 <= *(s + i) && *(s + i) <= 57)
-      return (i);
-  return (i);
-}
-
-int find_last_number(char *s, int len, int first)
-{
-  for (; first < len; first++)
-    if (48 > *(s + first) || *(s + first) > 57)
-      return(first);
-  return(first);
+  if (opt == 0)
+  {
+    if (c == 45)
+        return (-1);
+    else if (c >= 48 && c <= 57)
+        return(c - 48);
+    return (10);
+  }
+  else
+      if (c >= 48 && c <= 57)
+        return (1);
+      return (0);
 }
 
 int string_to_integer(char *s)
 {
-  int i, n, len, first, last, sign;
-  /* Get the length of the string */
-  len = str_len(s);
-  first = find_first_number(s, len);
-  last = find_last_number(s, len, first);
-  sign = get_sign(s, first);
+  int i, n, r, sign;
 
-  /* Start for loop to cycle through string */
-  for (i = first, n = 0; i <= last; i++)
+  for (i = 0, n = 0, sign = -1; *(s + i) != '\0'; i++)
   {
-    if(48 <= *(s + i) && *(s + i) <= 57)
-    {
-      if ((n * 10) - (*(s + i) - 48) == 0 || (n < (INT_MIN / 10)) || ((n == (INT_MIN / 10)) && *(s + i) == 9))
+    r = is_num(*(s + i), 0);
+    if (r == -1 && !(is_num(*(s + i - 1), 1)))
+      sign *= r;
+    else if (r != 10)
+      if ( n < INT_MIN / 10 || ( n == INT_MIN / 10 && n == 9))
         return (0);
       else
-        n = (n * 10) - (*(s + i) - 48);
-    }
+        n = (n * 10) - r;
+    else if (is_num(*(s + i - 1), 1))
+      break;
   }
-    if (n == INT_MIN && sign == -1)
-      return (0);
-    else
-      n *= sign;
+  if (sign < 0 && n == INT_MIN)
+    return (0);
+  else
+    n *= sign;
+
   return(n);
 }
