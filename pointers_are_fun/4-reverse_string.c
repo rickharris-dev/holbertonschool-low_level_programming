@@ -15,8 +15,8 @@ void reverse_string(char *s)
 
     for (i = 0, j = len - 1; i < ((len - 1) / 2); i++, j--)
     {
-      c = *(s + i);
-      *(s + i) = *(s + j);
-      *(s + j) = c;
+      c = *(s + i); /* Gets initial char */
+      *(s + i) = *(s + j); /* Inverts char */
+      *(s + j) = c; /* Sets value to intial char */
     }
 }
