@@ -69,7 +69,7 @@ void print_buffer(char *b, int size)
     {
       if (*(b + i + l) > 31 && *(b + i + l) < 127 && i + l < size)
         print_char(*(b + i + l));              /* Writes printable char */
-      else if (i + l < size - 1)
+      else if (i + l < size)
         print_char('.');                       /* Writes . if non-print char */
     }
     print_char('\n');                          /* Ends with new line */
