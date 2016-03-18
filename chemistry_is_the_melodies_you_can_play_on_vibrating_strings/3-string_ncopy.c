@@ -7,7 +7,7 @@ char *string_ncopy(char *dest, const char *src, int n)
   /* Finds the length of the dest */
   for (i = 0; *(src + i) != '\0'; i++);
 
-  if (i + 1 < n)
+  if (i + 1 < n) /* Determines the stop point to the shortest of src or n */
     s = i + 1;
   else
     s = n;

@@ -6,8 +6,8 @@ char *nconcat_strings(char *dest, const char *src, int n)
   /* Adds n characters from the src string to the dest string */
   for (j = 0; *(src + j) != '\0' && j < n; i++, j++)
   {
-    *(dest + i) = *(src + j);
+    *(dest + i) = *(src + j); /* Appends src to dest */
   }
-  *(dest + i + 1) = '\0';
+  *(dest + i + 1) = '\0'; /* Applies a null terminator */
   return dest;
 }
