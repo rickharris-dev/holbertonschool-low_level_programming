@@ -1,21 +1,21 @@
+int c = 1;
+
 int square_root(int n)
 {
-  int c;
-  long test;
+  long test = c * c;
 
   if (n < 0)
     return -1;
   else if (n == 0)
     return 0;
-
-  for (c = 1; c <= n; c++)
+  else if (test == n)
   {
-    test = c * c;
-    if (test == n)
-      return c;
-    else if (test > n)
-      return -1;
+    n = c;
+    c = 1;
+    return n;
   }
-
-  return -1;
+  else if (test > n)
+    return -1;
+  c++;
+  return square_root(n);
 }
