@@ -1,15 +1,21 @@
+int i = 2;
+int max;
+
 int is_prime_number(int n)
 {
-  int i, max;
+  if (i == 2)
+    max = n;
+
   if (n < 2)
     return 0;
-
-  for (max = n, i = 2; i <= max; i++)
-  {
-    if (n % i == 0)
-      return 0;
-    max = n / i;
+  else if (n % i == 0)
+    return 0;
+  else if (i > max) {
+    i = 2;
+    return 1;
   }
 
-  return 1;
+  max = n / i;
+  i++;
+  return is_prime_number(n);
 }
