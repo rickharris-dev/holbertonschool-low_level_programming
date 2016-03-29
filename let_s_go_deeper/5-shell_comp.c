@@ -19,6 +19,6 @@ int shell_comp(char *s1, char *s2)
   else if ((w == 0 && s1[x] != '\0') || s1[x] == '\0') {
     x = 0, y = 0, w = 0, m1 = -1, m2 = -1;
     return 0;
-  }
+  }s
   return shell_comp(s1, s2);
 }
