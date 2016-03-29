@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 int find_if_palindrome(char *s, int i, int c){
   if (c >= i - 1){
     return 1;
