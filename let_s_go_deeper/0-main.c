@@ -10,7 +10,7 @@ int main(void)
   printf("%d\n", r);
   r = factorial(5);
   printf("%d\n", r);
-  r = factorial(2147483647);
+  r = factorial(10);
   printf("%d\n", r);
   r = factorial(-1024);
   printf("%d\n", r);
