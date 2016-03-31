@@ -7,6 +7,6 @@ void print_string_half(char *str)
   for (i = 0; *(str + i) != '\0'; i++);
 
   /* Determine char where last half begins and start loop */
-  for (j = i / 2 + i % 2; j <= i; j++)
+  for (j = i / 2 + i % 2; j < i; j++)
     print_char(*(str + j)); /* Prints the selected char */
 }
