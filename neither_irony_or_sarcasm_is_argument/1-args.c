@@ -5,4 +5,5 @@ int main(int ac, char **av) {
 
   for (i = 0; i < ac; i++)
     printf("%s\n", av[i]);
+  return 0;
 }
