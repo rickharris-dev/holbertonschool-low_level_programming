@@ -14,6 +14,6 @@ libholberton.a: $(OBJECTS)
 	ar -rc libholberton.a $(OBJECTS)
 
 clean:
-	rm $(OBJECTS)
+	rm $(OBJECTS) libholberton.a
 
 re: $(OBJECTS)
