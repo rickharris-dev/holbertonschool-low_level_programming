@@ -5,7 +5,9 @@ char *string_dup(char *str){
   int i;
   char *s;
 
-  s = malloc(sizeof(*s) * 10);
+  for(i = 0; str[i] != '\0'; i++);
+
+  s = malloc(sizeof(*s) * ++i);
   if (s == NULL)
     return NULL;
   for(i = 0; str[i] != '\0'; i++)
