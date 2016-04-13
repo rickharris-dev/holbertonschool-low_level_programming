@@ -1,5 +1,4 @@
 #include <stdlib.h>
-#include <stdio.h>
 
 int **alloc_grid(int y, int x){
   int i, j;
