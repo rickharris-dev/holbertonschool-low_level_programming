@@ -2,7 +2,7 @@
 
 int print_char(char c)
 {
-  return (write(1, &c, 1));
+  return (write(1, &c, 1)); /* Prints each char */
 }
 
 void print_string(char *s)
@@ -11,7 +11,7 @@ void print_string(char *s)
 
   c = 0;
   while(s[c] != '\0') {
-    print_char(s[c]);
+    print_char(s[c]); /* Prints each char of string */
     c++;
   }
 }
@@ -21,9 +21,9 @@ void print_array_of_strings(char **a) {
     c = 0;
     while (a[c] != NULL) {
       if (c != 0)
-        print_char(' ');
-      print_string(a[c]);
+        print_char(' '); /* Prints a space between each string */
+      print_string(a[c]); /* Prints each string */
       c++;
     }
-    print_char('\n');
+    print_char('\n'); /* Prints a closing new line char */
 }
