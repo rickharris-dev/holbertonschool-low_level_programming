@@ -1,8 +1,4 @@
-#include <stdlib.h>
-#include "param_struct.h"
-#define SIZE(i) (sizeof(struct Param) * i)
-#include <stdio.h>
-typedef struct Param param;
+#include "my_functions.h"
 
 void free_tab_array(char **array){
   int l;

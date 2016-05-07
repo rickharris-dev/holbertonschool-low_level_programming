@@ -1,7 +1,4 @@
-#include "param_struct.h"
-#include <stdlib.h>
-#define ITEM(i) (sizeof(struct Param) * i)
-typedef struct Param param;
+#include "my_functions.h"
 
 int print_char(char c);
 

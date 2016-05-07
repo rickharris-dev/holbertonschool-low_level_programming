@@ -1,8 +1,4 @@
-#include <stdlib.h>
-#include "param_struct.h"
-#define SIZE(i) (sizeof(struct Param) * i)
-typedef struct Param param;
-#include <stdio.h>
+#include "my_functions.h"
 
 char **string_split(char * str);
 
@@ -27,7 +23,7 @@ struct Param *params_to_struct_array(int ac, char **av){
   param *array;
   int i;
 
-  array = malloc(SIZE((ac + 1)));
+  array = malloc(sizeof(struct Param) * (ac + 1));
   if (array == NULL)
     return NULL;
 
