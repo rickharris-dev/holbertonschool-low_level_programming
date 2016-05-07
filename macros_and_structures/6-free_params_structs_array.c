@@ -1,6 +1,7 @@
 #include "my_functions.h"
 
 void free_tab_array(char **array){
+  /* Function frees memory allocated in the tab section of struct */
   int l;
   for (l = 0; array[l] != NULL; l++);
   for (l = l - 1; l >= 0; l--){
@@ -10,6 +11,7 @@ void free_tab_array(char **array){
 }
 
 int find_array_size(struct Param *array) {
+  /* Function determines the number of structs in array */
   int l;
   for (l = 0; array[l].str != NULL; l++);
   return l;

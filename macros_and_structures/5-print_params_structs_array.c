@@ -1,19 +1,5 @@
 #include "my_functions.h"
 
-int print_char(char c);
-
-int get_divisor (int l) {
-  /* Function creates a divisor to isolate each digit */
-  int d;
-
-  d = 1;
-  while (l - 1 > 0){
-    d = d * 10;
-    l--;
-  }
-  return d;
-}
-
 int number_length(int n){
   /* Function finds the number of digits in a number */
   int c;
@@ -31,11 +17,18 @@ int number_length(int n){
 void print_number(int n){
   /* Function prints a number one digit at a time */
   int l;
+  int ll;
   int d;
   char p;
 
   l = number_length(n);
-  d = get_divisor(l);
+  ll = l;
+  d = 1;
+  while (ll - 1 > 0){
+    d = d * 10;
+    ll--;
+  }
+
   while (l > 0){
     p = '0' + (n / d);
     print_char(p);
@@ -67,6 +60,7 @@ void print_array(char **array) {
 }
 
 void print_params_structs_array(struct Param *array){
+  /* Function initializes the printing of each struct in array */
   int i;
 
   for (i = 0; array[i].str != NULL; i++) {

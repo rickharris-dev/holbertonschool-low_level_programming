@@ -1,7 +1,5 @@
 #include "my_functions.h"
 
-char **string_split(char * str);
-
 int string_length(char *str) {
   /* Finds the length of the string */
   int i;
@@ -10,6 +8,7 @@ int string_length(char *str) {
 }
 
 void copy_string(char *str, char *copy){
+  /* Copies the string into newly allocated memory */
   int i;
 
   for (i = 0; str[i] != '\0'; i++) {
@@ -20,6 +19,7 @@ void copy_string(char *str, char *copy){
 }
 
 struct Param *params_to_struct_array(int ac, char **av){
+  /* Function sets up each argument into an array of structs */
   param *array;
   int i;
 
