@@ -1,6 +1,7 @@
 #include "my_header.h"
 
 int string_length(char *str) {
+  /* Finds the length of the string. */
   int l;
 
   for(l = 0; str[l] != '\0'; l++);
