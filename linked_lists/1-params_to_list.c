@@ -28,6 +28,7 @@ char *copy_string(char *str){
 }
 
 List *find_last_node(List *list){
+  /* Recurses to find the last node in list */
   if(list->next == NULL)
     return list;
   return find_last_node(list->next);
