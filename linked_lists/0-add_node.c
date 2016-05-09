@@ -9,6 +9,7 @@ int string_length(char *str) {
 }
 
 char *copy_string(char *str){
+  /* Copies string into newly allocated memory. */
   char * copy;
   int i;
   int l;
