@@ -58,6 +58,7 @@ int add_node(List **list, char *str){
 }
 
 List *params_to_list(int ac, char **av) {
+  /* Loops through arguments and appends to list */
   List *list;
   int i;
 
