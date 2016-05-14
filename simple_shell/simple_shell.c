@@ -7,50 +7,6 @@ int get_arg_count(char **argv)
         return i;
 }
 
-int string_len(char *str){
-        int i;
-        for (i = 0; str[i] != '\0'; i++);
-        return i;
-}
-
-void write_string(char *str)
-{
-        int i;
-        for (i = 0; str[i] != '\0'; i++)
-                print_char(str[i]);
-}
-
-char *trim_left(char *str, int n) {
-        return &str[n];
-}
-
-char *concat_strings(char *first, char * second, char sep) {
-        int i;
-        int len_one;
-        int len_two;
-        int sep_exists;
-        char *str;
-
-        len_one = string_len(first);
-        len_two = string_len(second);
-        sep_exists = 0;
-        if (sep)
-                sep_exists = 1;
-
-        str = malloc(sizeof(char) * (len_one + len_two + 2));
-        for (i = 0; i < len_one; i++) {
-                str[i] = first[i];
-        }
-        if (sep_exists)
-                str[i] = sep;
-        for (i = 0; i < len_two; i++) {
-                str[len_one + sep_exists + i] = second[i];
-        }
-        str[len_one + sep_exists + i] = '\0';
-
-        return str;
-}
-
 int check_path(char *cmd, char **argv, char **env)
 {
         int i;
