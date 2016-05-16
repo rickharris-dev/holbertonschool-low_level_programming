@@ -31,6 +31,7 @@ int str_to_int(char *str);
 
 /* ------ memfunc.c ------ */
 void free_array(char **arr);
+char *malloc_str(char *str);
 
 /* ------ prntfunc.c ------ */
 int print_char(char c);
@@ -49,5 +50,6 @@ int strn_compare(char *input, char *test, int n);
 char *trim_left(char *str, int n);
 
 /* ------ vars.c ------ */
-char *dollar_builtins(int status, char *argv);
-char **dollar_vars(int status, char **argv, __attribute__((unused)) char **env);
+char *dollar_builtins(int status, char *argv, char **env);
+int dollar_vars(int status, char **argv, char **env);
+char *env_vars(char *argv, char **env);

@@ -38,8 +38,7 @@ int shell_prompt(int status, char **env)
         } else if (argv[0] == NULL) {
                 return return_status(0, argv);
         }
-        argv = dollar_vars(status, argv, env);
-        if (!dollar_vars(status, argv, env)) {
+        if (dollar_vars(status, argv, env)) {
                 write_string("simple_shell: Error converting variables\n");
                 return return_status(1, argv);
         } else if (check_builtins(argv[0], argv, env)) {

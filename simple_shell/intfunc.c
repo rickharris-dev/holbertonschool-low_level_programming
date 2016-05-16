@@ -19,11 +19,7 @@ char *int_to_str(int n)
         int neg;
         char *str;
         if (n == 0) {
-                str = malloc(sizeof(char) * 2);
-                if (str == NULL)
-                        return NULL;
-                str = "0";
-                return str;
+                return malloc_str("0");
         } else if (n < 0) {
                 neg = 1;
         } else {
@@ -57,7 +53,7 @@ int str_to_int(char *str)
                 if (str[i] == '-' && !val)
                         sign = sign * -1;
                 else if (str[i] == '+' && !val)
-                        sign = sign;
+                        sign = sign * 1;
                 else if (str[i] > '9' || str[i] < '0')
                         return 0;
                 else

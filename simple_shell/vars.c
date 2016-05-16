@@ -1,6 +1,6 @@
 #include "hdr.h"
 
-char *dollar_builtins(int status, char *argv)
+char *dollar_builtins(int status, char *argv, char **env)
 /* Check for built-in $VARS */
 {
         if (argv[1] == '?') {
@@ -8,20 +8,44 @@ char *dollar_builtins(int status, char *argv)
                 return int_to_str(status);
         }
 
-        return argv;
+        return env_vars(argv, env);
 
 }
 
-char **dollar_vars(int status, char **argv, __attribute__((unused)) char **env)
+int dollar_vars(int status, char **argv, char **env)
 /* Checks for $VARS in array */
 {
         int i;
         for (i = 0; argv[i] != NULL; i++) {
                 if (argv[i][0] == '$') {
-                        argv[i] = dollar_builtins(status, argv[i]);
-                        if (!argv[i])
-                                return NULL;
+                        argv[i] = dollar_builtins(status, argv[i], env);
+                        if (!argv[i]) {
+                                return 1;
+                        }
                 }
         }
-        return argv;
+        return 0;
+}
+
+char *env_vars(char *argv, char **env)
+/* Prints environment variables in env */
+{
+        int i;
+        int len;
+
+        len = str_len(argv);
+        for (i = 0; i < len; i++) {
+                if (i != len - 1)
+                        argv[i] = argv[i + 1];
+                else
+                        argv[i] = '=';
+        }
+        for (i = 0; env[i] != NULL; i++) {
+                if (strn_compare(argv, env[i], len)) {
+                        free(argv);
+                        return trim_left(env[i], len);
+                }
+        }
+        free(argv);
+        return malloc_str("");
 }

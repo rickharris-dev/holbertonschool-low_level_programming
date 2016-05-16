@@ -11,10 +11,10 @@ OUTPUT = shell
 all: $(OUTPUT)
 
 $(OUTPUT): $(OBJECTS)
-	$(CC) $(GCC) $(INCLUDES) $(OBJECTS) $(LIBRARY) -o $(OUTPUT)
+	$(CC) $(CFLAGS) $(INCLUDES) $(OBJECTS) $(LIBRARY) -o $(OUTPUT)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $<  -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm $(OBJECTS) $(OUTPUT)
