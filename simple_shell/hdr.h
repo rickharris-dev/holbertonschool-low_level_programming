@@ -42,6 +42,9 @@ void write_string(char *str);
 int return_status(int status, char **argv);
 int shell_prompt(int status, char **env);
 
+/* ------ specchar.c ------ */
+void handle_comments(char **argv);
+
 /* ------ strfunc.c ------ */
 char *concat_strings(char *first, char *second, char sep);
 int str_compare(char *input, char *test);
