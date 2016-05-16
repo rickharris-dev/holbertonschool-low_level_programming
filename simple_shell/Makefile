@@ -1,13 +1,12 @@
 
 CC = gcc
 CFLAGS = -Wall -pedantic -Werror -Wextra
-INCLUDES = my_header.h libshell.h
-SOURCES = check_builtins.c check_path.c env.c exec_program.c exit.c \
-		mem_func.c simple_shell.c string_functions.c vars.c \
-		write_functions.c
+INCLUDES = hdr.h libshell.h
+SOURCES = chkbuiltins.c chkpath.c env.c execcmd.c exit.c intfunc.c \
+		memfunc.c prntfunc.c shell.c strfunc.c vars.c
 LIBRARY = libshell.a
 OBJECTS = $(SOURCES:.c=.o)
-OUTPUT = simple_shell
+OUTPUT = shell
 
 all: $(OUTPUT)
 

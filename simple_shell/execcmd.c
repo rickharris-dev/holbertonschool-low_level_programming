@@ -1,6 +1,6 @@
-#include "my_header.h"
+#include "hdr.h"
 
-int exec_program(char *cmd, char **argv, char **env)
+int exec_cmd(char *cmd, char **argv, char **env)
 /* Executes the program with the given arguments */
 {
         int pid;
@@ -14,8 +14,11 @@ int exec_program(char *cmd, char **argv, char **env)
                 status = execve(cmd, argv, env);
         } else {
                 wait(&status);
-                if(WIFEXITED(status))
+                if(WIFEXITED(status)){
+                        free(cmd);
                         return WEXITSTATUS(status);
+                }
         }
+        free(cmd);
         return 0;
 }

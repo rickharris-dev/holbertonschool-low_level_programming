@@ -1,18 +1,7 @@
-#include "my_header.h"
-
-int string_len(char *str)
-{
-        int i;
-        for (i = 0; str[i] != '\0'; i++);
-        return i;
-}
-
-char *trim_left(char *str, int n)
-{
-        return &str[n];
-}
+#include "hdr.h"
 
 char *concat_strings(char *first, char *second, char sep)
+/* Combines strings into one new string with separator */
 {
         int i;
         int len_one;
@@ -20,8 +9,8 @@ char *concat_strings(char *first, char *second, char sep)
         int sep_exists;
         char *str;
 
-        len_one = string_len(first);
-        len_two = string_len(second);
+        len_one = str_len(first);
+        len_two = str_len(second);
         sep_exists = 0;
         if (sep)
                 sep_exists = 1;
@@ -43,7 +32,8 @@ char *concat_strings(char *first, char *second, char sep)
         return str;
 }
 
-int compare_strings(char *input, char *test)
+int str_compare(char *input, char *test)
+/* Compares all chars in strings */
 {
         int i;
 
@@ -56,7 +46,16 @@ int compare_strings(char *input, char *test)
         return 1;
 }
 
+int str_len(char *str)
+/* Returns number of chars in string */
+{
+        int i;
+        for (i = 0; str[i] != '\0'; i++);
+        return i;
+}
+
 int strn_compare(char *input, char *test, int n)
+/* Compares n characters of strings */
 {
         int i;
 
@@ -67,4 +66,10 @@ int strn_compare(char *input, char *test, int n)
         if (input[i] == '\0' && test[i] != '\0')
                 return 0;
         return 1;
+}
+
+char *trim_left(char *str, int n)
+/* returns memory address of n + 1 char */
+{
+        return &str[n];
 }

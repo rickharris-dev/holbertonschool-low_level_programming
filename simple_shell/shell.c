@@ -1,20 +1,26 @@
-#include "my_header.h"
+#include "hdr.h"
 
-int get_arg_count(char **argv)
+int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, char **env)
+/* Launches shell */
 {
-        int i;
-        for (i = 0; argv[i] != NULL; i++);
-        return i;
+        int status;
+
+        status = 0;
+        while (1)
+                status = shell_prompt(status, env);
+        return 0;
 }
 
-int ret_stat(int status, char **argv) {
+int return_status(int status, char **argv)
+/* Frees memory and then returns status */
+{
         free_array(argv);
         return status;
 }
 
 int shell_prompt(int status, char **env)
+/* Reads input and initializes processing */
 {
-        /* Reads input and initializes processing */
         char *input;
         char **argv;
 
@@ -28,29 +34,18 @@ int shell_prompt(int status, char **env)
         free(input);
         if (argv == NULL) {
                 write_string("simple_shell: Error processing arguments\n");
-                return ret_stat(1, argv);
+                return return_status(1, argv);
         } else if (argv[0] == NULL) {
-                return ret_stat(0, argv);
+                return return_status(0, argv);
         }
         argv = dollar_vars(status, argv, env);
         if (!dollar_vars(status, argv, env)) {
                 write_string("simple_shell: Error converting variables\n");
-                return ret_stat(1, argv);
+                return return_status(1, argv);
         } else if (check_builtins(argv[0], argv, env)) {
-                return ret_stat(0, argv);
+                return return_status(0, argv);
         }
 
         status = check_path(argv[0], argv, env);
-        return ret_stat(status, argv);
-}
-
-int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, char **env)
-{
-        /* Launches shell */
-        int status;
-
-        status = 0;
-        while (1)
-                status = shell_prompt(status, env);
-        return 0;
+        return return_status(status, argv);
 }
