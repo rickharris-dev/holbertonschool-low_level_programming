@@ -7,74 +7,50 @@ int get_arg_count(char **argv)
         return i;
 }
 
-int check_path(char *cmd, char **argv, char **env)
-{
-        int i;
-        int j;
-        char *path;
-        char **paths;
-        char *full_path;
-
-        for (i = 0; env[i] != NULL; i++) {
-                if (strn_compare(env[i], "PATH=", 5)) {
-                        path = trim_left(env[i], 5);
-                        paths = string_split(path, ':');
-                        for (j = 0; paths[j] != NULL; j++){
-                                full_path = concat_strings(paths[j], cmd, '/');
-                                if (access(full_path, F_OK) != -1) {
-                                        exec_program(full_path, argv, env);
-                                        return 0;
-                                }
-                                free(full_path);
-                        }
-                }
-        }
-        return -1;
+int ret_stat(int status, char **argv) {
+        free_array(argv);
+        return status;
 }
 
-int check_builtins(char *cmd, char **env)
-{
-        if (compare_strings(cmd, "exit")) {
-                exit(0);
-        } else if (compare_strings(cmd, "env")) {
-                int i;
-                for (i = 0; env[i] != NULL; i++) {
-                        write_string(env[i]);
-                        print_char('\n');
-                }
-                return 1;
-        }
-        return 0;
-}
-
-int process_input(char *input, char **env)
-{
-        char **argv;
-
-        argv = string_split(input, ' ');
-        if (argv == NULL)
-                return -1;
-        else if (argv[0] == NULL)
-                return 0;
-        else if (check_builtins(argv[0], env))
-                return 0;
-        return check_path(argv[0], argv, env);
-}
-
-void shell_prompt(char **env)
+int shell_prompt(int status, char **env)
 {
         /* Reads input and initializes processing */
         char *input;
+        char **argv;
 
         write_string("simple_shell> ");
         input = read_line(0);
-        process_input(input, env);
+        if (!input) {
+                write_string("simple_shell: Error reading arguments\n");
+                return 1;
+        }
+        argv = string_split(input, ' ');
+        free(input);
+        if (argv == NULL) {
+                write_string("simple_shell: Error processing arguments\n");
+                return ret_stat(1, argv);
+        } else if (argv[0] == NULL) {
+                return ret_stat(0, argv);
+        }
+        argv = dollar_vars(status, argv, env);
+        if (!dollar_vars(status, argv, env)) {
+                write_string("simple_shell: Error converting variables\n");
+                return ret_stat(1, argv);
+        } else if (check_builtins(argv[0], argv, env)) {
+                return ret_stat(0, argv);
+        }
+
+        status = check_path(argv[0], argv, env);
+        return ret_stat(status, argv);
 }
 
 int main(__attribute__((unused)) int ac, __attribute__((unused)) char **av, char **env)
 {
         /* Launches shell */
+        int status;
+
+        status = 0;
         while (1)
-                shell_prompt(env);
+                status = shell_prompt(status, env);
         return 0;
 }

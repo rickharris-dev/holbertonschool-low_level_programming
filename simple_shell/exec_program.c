@@ -8,16 +8,14 @@ int exec_program(char *cmd, char **argv, char **env)
 
         if((pid = fork()) == -1) {
                 perror("fork");
-                return (1);
+                return (0);
         }
         if (pid == 0) {
                 status = execve(cmd, argv, env);
-                if (status != 0) {
-                        perror("execve");
-                        exit(-1);
-                }
         } else {
                 wait(&status);
+                if(WIFEXITED(status))
+                        return WEXITSTATUS(status);
         }
         return 0;
 }

@@ -27,6 +27,9 @@ char *concat_strings(char *first, char *second, char sep)
                 sep_exists = 1;
 
         str = malloc(sizeof(char) * (len_one + len_two + 2));
+        if (!str) {
+                return NULL;
+        }
         for (i = 0; i < len_one; i++) {
                 str[i] = first[i];
         }
