@@ -23,6 +23,7 @@ int check_path(char *cmd, char **argv, char **env)
         }
 
         paths = string_split(path, ':');
+        free(path);
         if (!paths) {
                 perror("string_split");
                 return 1;

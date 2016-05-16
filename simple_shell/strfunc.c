@@ -69,7 +69,17 @@ int strn_compare(char *input, char *test, int n)
 }
 
 char *trim_left(char *str, int n)
-/* returns memory address of n + 1 char */
+/* Returns newly allocated string */
 {
-        return &str[n];
+        int i;
+        int len;
+        char *new;
+
+        len = str_len(str);
+        new = malloc(sizeof(char) * (len + 1 - n));
+        new[len - n] = '\0';
+        for (i = 0; str[n + i] != '\0'; i++) {
+                new[i] = str[n + i];
+        }
+        return new;
 }
