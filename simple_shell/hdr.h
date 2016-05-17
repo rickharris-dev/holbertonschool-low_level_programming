@@ -6,6 +6,13 @@
 #include <errno.h>
 #define BUFFER_SIZE 1024
 
+/* ------ chdir.c ------ */
+int cd_no_input(char **env);
+int change_directory(char **argv, char **env);
+void convert_env_value(char *val, int len);
+void convert_tilde(char **argv, char**env);
+char *get_env_value(char *val, char **env);
+
 /* ------ chkbuiltins.c ------ */
 int check_builtins(char *cmd, char **argv, char **env);
 
@@ -39,7 +46,9 @@ void write_string(char *str);
 
 /* ------ shell.c ------ */
 /* Program entry at main function */
+int get_arg_count(char **argv);
 int return_status(int status, char **argv);
+int process_cmd(int status, char **argv, char **env);
 int shell_prompt(int status, char **env);
 
 /* ------ specchar.c ------ */

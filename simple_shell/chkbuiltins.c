@@ -13,6 +13,8 @@ int check_builtins(char *cmd, char **argv, char **env)
                 exit(code);
         } else if (str_compare(cmd, "env")) {
                 return print_env(env);
+        } else if (str_compare(cmd, "cd")) {
+                return change_directory(argv, env);
         }
         return 0;
 }
