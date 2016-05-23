@@ -1,6 +1,6 @@
 #include "hdr.h"
 
-char *dollar_builtins(int status, char *argv, char **env)
+char *dollar_builtins(int status, char *argv, struct Stringlist *env)
 /* Check for built-in $VARS */
 {
         if (argv[1] == '?') {
@@ -12,7 +12,7 @@ char *dollar_builtins(int status, char *argv, char **env)
 
 }
 
-int dollar_vars(int status, char **argv, char **env)
+int dollar_vars(int status, char **argv, struct Stringlist *env)
 /* Checks for $VARS in array */
 {
         int i;
@@ -27,7 +27,7 @@ int dollar_vars(int status, char **argv, char **env)
         return 0;
 }
 
-char *env_vars(char *argv, char **env)
+char *env_vars(char *argv, struct Stringlist *env)
 /* Prints environment variables in env */
 {
         int i;
@@ -40,11 +40,12 @@ char *env_vars(char *argv, char **env)
                 else
                         argv[i] = '=';
         }
-        for (i = 0; env[i] != NULL; i++) {
-                if (strn_compare(argv, env[i], len)) {
+        while (env != NULL) {
+                if (strn_compare(argv, env->str, len)) {
                         free(argv);
-                        return trim_left(env[i], len);
+                        return trim_left(env->str, len);
                 }
+                env = env->next;
         }
         free(argv);
         return malloc_str("");

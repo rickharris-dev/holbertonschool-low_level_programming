@@ -9,7 +9,7 @@ int check_file_exists(char *path)
         return 0;
 }
 
-int check_path(char *cmd, char **argv, char **env)
+int check_path(char *cmd, char **argv, struct Stringlist *env)
 /* Checks the paths provided by env for the given command */
 {
         char *path;
@@ -40,15 +40,14 @@ int check_path(char *cmd, char **argv, char **env)
         return exec_cmd(prog, argv, env);
 }
 
-char *find_path(char **env)
+char *find_path(struct Stringlist *env)
 /* Locates the path line in env */
 {
-        int i;
-
-        for (i = 0; env[i] != NULL; i++) {
-                if (strn_compare(env[i], "PATH=", 5)) {
-                        return trim_left(env[i], 5);
+        while (env != NULL) {
+                if (strn_compare(env->str, "PATH=", 5)) {
+                        return trim_left(env->str, 5);
                 }
+                env = env->next;
         }
         return NULL;
 }

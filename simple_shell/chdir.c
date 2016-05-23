@@ -1,6 +1,6 @@
 #include "hdr.h"
 
-int cd_no_input(char **env)
+int cd_no_input(struct Stringlist *env)
 /* Handles cd cmd with no input to return to home dir */
 {
         int stat;
@@ -15,7 +15,7 @@ int cd_no_input(char **env)
         return stat;
 }
 
-int change_directory(char **argv, char **env)
+int change_directory(char **argv, struct Stringlist *env)
 /* Updates argv for change directory requests */
 {
         if (argv[1] == NULL || str_compare(argv[1], "~")) {
@@ -54,7 +54,7 @@ void convert_env_value(char *val, int len)
         }
 }
 
-void convert_tilde(char **argv, char**env)
+void convert_tilde(char **argv, struct Stringlist *env)
 /* Convert tilde to home path and concat strings */
 {
         char *tmp;
@@ -70,19 +70,19 @@ void convert_tilde(char **argv, char**env)
         free(path2);
 }
 
-char *get_env_value(char *val, char **env)
+char *get_env_value(char *val, struct Stringlist *env)
 /* Returns the home path */
 {
-        int i;
         int len;
 
         len = str_len(val);
         convert_env_value(val, len);
-        for (i = 0; env[i] != NULL; i++) {
-                if (strn_compare(val, env[i], len)) {
+        while (env != NULL) {
+                if (strn_compare(val, env->str, len)) {
                         free(val);
-                        return trim_left(env[i], len);
+                        return trim_left(env->str, len);
                 }
+                env = env->next;
         }
         return malloc_str("");
 }

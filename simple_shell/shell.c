@@ -12,12 +12,15 @@ int main(int ac, char **av, char **env)
 /* Launches shell */
 {
         int status;
+        struct Stringlist *envlist;
+
+        envlist = strarr_to_list(env);
 
         (void)(ac);
         (void)(av);
         status = 0;
         while (1)
-                status = shell_prompt(status, env);
+                status = shell_prompt(status, envlist);
         return 0;
 }
 
@@ -28,11 +31,11 @@ int return_status(int status, char **argv)
         return status;
 }
 
-int process_cmd(int status, char **argv, char **env)
+int process_cmd(int status, char **argv, struct Stringlist *env)
 /* Checks built-ins for cmd or checks paths for cmd */
 {
         int tmp;
-        
+
         tmp = check_builtins(argv[0], argv, env);
         if (tmp == -1)
                 return 1;
@@ -42,7 +45,7 @@ int process_cmd(int status, char **argv, char **env)
         return status;
 }
 
-int shell_prompt(int status, char **env)
+int shell_prompt(int status, struct Stringlist *env)
 /* Reads input and initializes processing */
 {
         char *input;
