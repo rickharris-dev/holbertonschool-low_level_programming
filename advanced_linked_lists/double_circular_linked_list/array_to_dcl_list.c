@@ -7,9 +7,9 @@ List *array_to_dcl_list(char **array)
     List *list = NULL;
 
     for (i = 0; array[i] != NULL; i++) {
-        new = add_dcl_list(list, array[i]);
+        new = add_dcl_list(list, array[i]); /* Creates a new list item */
         if (i == 0)
-            list = new;
+            list = new; /* If first, points list to the item */
     }
     return list;
 }
