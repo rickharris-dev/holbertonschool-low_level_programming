@@ -7,7 +7,7 @@ void print_cl_list(List *list)
 
     while (list != first) { /* Prints each list item */
         if (first == NULL)
-            first = list;
+            first = list; /* Sets the first item in list */
         next = list->next; /* Sets the next item */
         print_string(list->str); /* Prints the current item's str */
         print_string("\n\t"); /* Prints new line and tab */
