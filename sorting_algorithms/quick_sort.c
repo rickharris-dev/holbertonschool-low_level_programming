@@ -6,22 +6,25 @@ void quick_sort(int *array, int size)
         int z = size - 1;
         int pivot;
         int swap;
-        /* Returns if the partition is sorted */
-        if (size < 2)
+
+        if (size < 2) /* Returns if the partition is sorted */
                 return;
-        /* Chooses a random pivot point */
-        pivot = array[rand() % size];
+        pivot = array[rand() % size]; /* Chooses a random pivot point */
         /* Swaps values until sorted small to left and larger right */
         while (a < z) {
                 while (array[a] < pivot)
                         a++;
                 while (array[z] > pivot)
                         z--;
-                swap = array[a];
-                array[a] = array[z];
-                array[z] = swap;
+                if (array[a] > array[z]) {
+                        swap = array[a];
+                        array[a] = array[z];
+                        array[z] = swap;
+                } else {
+                        a++;
+                }
         }
         /* Recursively sorts each partition */
         quick_sort(array, a);
-        quick_sort(&array[a + 1], size - a - 1);
+        quick_sort(&array[a], size - a);
 }
