@@ -8,7 +8,7 @@
  * @child: string to match from parents path
  * Description: Recurses linked list to find a matching Ntree node
  */
-NTree *find_child(List *list, char *child);
+NTree *find_child(List *list, char *child)
 {
 	if (!list || !list->node)
 		return NULL;
