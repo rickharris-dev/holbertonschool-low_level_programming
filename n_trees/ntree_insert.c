@@ -1,6 +1,7 @@
 #include "tree.h"
 #include <string.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
  * find_child - locates child node
@@ -10,7 +11,7 @@
  */
 NTree *find_child(List *list, char *child)
 {
-	if (!list->node)
+	if (!list || !list->node)
 		return NULL;
 	if (!list->node->str || !child)
 		return NULL;
