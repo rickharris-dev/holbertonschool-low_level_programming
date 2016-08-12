@@ -5,7 +5,7 @@
  * pop_stack - Returns string in node
  * @list: Pointer to a Stack node
  * Description: Returns string in the node at top of the stack
- * 				and removes the node from the Stack
+ *				and removes the node from the Stack
  */
 char *pop_stack(Stack **list)
 {

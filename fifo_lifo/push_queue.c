@@ -41,7 +41,8 @@ int push_queue(Queue **list, char *str)
 	{
 		last = get_last(*list);
 		last->next = new;
-	} else {
+	} else
+	{
 	/* Else start the queue */
 		*list = new;
 	}
